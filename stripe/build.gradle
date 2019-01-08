@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'checkstyle'
+// make sure this line comes *after* you apply the Android plugin
+apply plugin: 'com.getkeepsafe.dexcount'
+
+assemble.dependsOn('lint')
+check.dependsOn('checkstyle')
+
+version = VERSION_NAME
+
+configurations {
+    javadocDeps
+}
+
+dependencies
+        {
+    implementation "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    // Api for this import because we use reflection to alter TextInputLayout
+    api "com.android.support:design:${rootProject.ext.supportLibVersion}"
+
+    javadocDeps "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
+    javadocDeps "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    javadocDeps "com.android.support:design:${rootProject.ext.supportLibVersion}"
+    compileOnly "javax.annotation:jsr250-api:${rootProject.ext.javaAnnotationVersion}"
+
+    testImplementation "junit:junit:${rootProject.ext.junitVersion}"
+    testImplementation "org.mockito:mockito-core:${rootProject.ext.mockitoCoreVersion}"
+    testImplementation "org.robolectric:robolectric:${rootProject.ext.robolectricVersion}"
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+        }
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        consumerProguardFiles 'proguard-rules.txt'
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+        test {
+
+        }
+    }
+    testOptions {
+        unitTests {
+            // Note: without this, all Robolectric tests using BuildConfig will fail.
+            includeAndroidResources = true
+        }
+    }
+    productFlavors {
+    }
+}
+
+apply from: 'deploy.gradle'

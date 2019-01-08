@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    implementation project(':stripe')
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+
+    implementation 'com.google.android.gms:play-services-wallet:11.4.2'
+    implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+
+    /* Needed for RxAndroid */
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.3.0'
+
+    /* Needed for Rx Bindings on views */
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+
+    /* Used for server calls */
+    implementation 'com.squareup.okio:okio:1.13.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    /* Used to make Retrofit easier and GSON & Rx-compatible*/
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    /* Used to debug your Retrofit connections */
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion rootProject.ext.compileSdkVersion
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+        androidTest {
+            setRoot('src/test')
+        }
+    }
+}

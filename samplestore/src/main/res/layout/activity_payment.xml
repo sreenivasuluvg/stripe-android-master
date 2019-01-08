@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_padding"
+    tools:context="com.stripe.samplestore.PaymentActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:id="@+id/cart_list_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/payment_screen_spacing"
+            android:text="@string/enter_details"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/payment_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_details"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/payment_screen_spacing"
+            android:text="@string/enter_shipping_details"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/shipping_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_shipping_details"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            />
+
+        <Button
+            android:id="@+id/btn_purchase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/payment_screen_spacing"
+            android:text="@string/confirm_purchase"
+            />
+
+    </LinearLayout>
+
+</ScrollView>
